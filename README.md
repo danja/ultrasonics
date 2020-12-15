@@ -16,5 +16,23 @@ Added a minimal one-transistor driver and speaker to another output port, stuck 
 
 Within about an hour, from scratch, I had the world's worst theremin.
 
+![minimal theremin](https://github.com/danja/ultrasonics/blob/main/docs/images/theremin-0.jpeg?raw=true)
+
+Little video here : https://youtu.be/0a9vGNTQi6s (also at https://github.com/danja/ultrasonics/blob/main/docs/thereminimal.mp4)
+
+Circuit is trivial :
+
+![minimal theremincircuit](https://github.com/danja/ultrasonics/blob/main/docs/images/theremin-0-circuit.jpeg?raw=true)
+
+**no capacitor!** - just noticed, it was actually bypassed, clumsy me. But shouldn't make a difference as long as the Arduino pin is normally low.
+
+`tone(port, freq)` sends a square wave out to the numbered digital pin. The capacitor will block DC, the resistor limit the current (both values just what seemed reasonable guesses). Transistor I had nearest was a BC109, but practically any transistor would do.  
+
+I suppose I should have a go at making a more usable theremin. One transducer pair for frequency, another for amplitude (will they interact? - *hope so!*). Given the available libraries, MIDI out from an Arduino is pretty trivial.
+
+But what I really want to play with is around spacial scanning, around the phased-array thing, but more minimal.
+
+
+
 
 
