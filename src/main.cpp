@@ -1,48 +1,62 @@
 #include <Arduino.h>
-
+//#include <cmath>
 // ---------------------------------------------------------------- //
-// Arduino Ultrasoninc Sensor HC-SR04
-// Re-writed by Arbi Abdul Jabbaar
-// Using Arduino IDE 1.8.7
-// Using HC-SR04 Module
-// Tested on 17 September 2019
+// Thereminimal v0.1
+// Using Arduino & Ultrasonic Sensor Module HC-SR04
+//
+// Danny Ayers 2020
+// Sections derived from code of Arbi Abdul Jabbaar
 // ---------------------------------------------------------------- //
 
-#define echoPin 2 // attach pin D2 Arduino to pin Echo of HC-SR04
-#define trigPin 3 //attach pin D3 Arduino to pin Trig of HC-SR04
-#define TONE_PIN 4
+const int ECHO_PIN = 2; // attach pin D2 Arduino to pin Echo of HC-SR04
+const int TRIG_PIN = 3; //attach pin D3 Arduino to pin Trig of HC-SR04
+const int TONE_PIN = 4;
+
+const int C = 343;                // speed of sound in m/s
+const int DISTANCE_SCALE = 20000; // factor to get distance in cm
+const int FREQ_SCALE = 30;        // factor to produce a reasonable pitch
 
 // defines variables
 long duration; // variable for the duration of sound wave travel
-int distance; // variable for the distance measurement
+int distance;  // variable for the distance measurement
 
-void setup() {
-  pinMode(trigPin, OUTPUT); // Sets the trigPin as an OUTPUT
-  pinMode(echoPin, INPUT); // Sets the echoPin as an INPUT
-  Serial.begin(9600); // // Serial Communication is starting with 9600 of baudrate speed
-  Serial.println("Ultrasonic Sensor HC-SR04 Test"); // print some text in Serial Monitor
-  Serial.println("with Arduino UNO R3");
+void setup()
+{
+  pinMode(TRIG_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
+  // Zeros trig pin
+  digitalWrite(TRIG_PIN, LOW);
+
+  Serial.begin(9600);
+  Serial.println("Thereminimal");
 }
-void loop() {
-  // Clears the trigPin condition
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
-  // Sets the trigPin HIGH (ACTIVE) for 10 microseconds
-  digitalWrite(trigPin, HIGH);
+
+void loop()
+{
+  // ping the module
+  digitalWrite(TRIG_PIN, HIGH);
   delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
-  // Reads the echoPin, returns the sound wave travel time in microseconds
-  duration = pulseIn(echoPin, HIGH);
-  // Calculating the distance
-  distance = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
+  digitalWrite(TRIG_PIN, LOW);
+
+  // sound travel time in microseconds
+  duration = pulseIn(ECHO_PIN, HIGH);
+  distance = duration * C / DISTANCE_SCALE; // Speed of sound wave divided by 2 (go and back)
   // Displays the distance on the Serial Monitor
-  // Serial.print("Distance: ");
-  // Serial.print(distance);
-  
-  int freq = distance * 50;
-  if(distance < 500){  
-  tone(TONE_PIN, freq);
-  } else {
+
+  Serial.print(distance);
+  Serial.println(" cm");
+
+  int freq = distance * FREQ_SCALE;
+
+  if (distance < 200) // only play if distance < 200cm
+  {
+    tone(TONE_PIN, freq);
+    // Serial.print(freq);
+    // Serial.println(" Hz");
+  }
+  else
+  {
     noTone(TONE_PIN);
   }
+  // delay(200);
 }
