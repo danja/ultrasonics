@@ -7,7 +7,8 @@ My first attempt used a 2-transistor astable multivibrator to drive the transduc
 
 
 
-I didn't spend much time trying to get the levitation working, was very distracted by the response of the transducers. When driven with a square wave, there are really significant higher harmonics getting across, they only really start dropping after the 10th harmonic, ie. 400kHz!
+I didn't spend much time trying to get the levitation working, was very distracted by the response of the transducers. (The levitation frame is very handy for test/measurement).
+When driven with a square wave, there are really significant higher harmonics getting across, they only really start dropping after the 10th harmonic, ie. 400kHz!
 
 I have started preparing hardware for trying out some spatial-scanning ideas, but before going there I want to do a load of measuring/analysis of the response of these things. Coincidentally I have some ESP32 audio projects on the go, so I think I'll move over to there for a little while, put together a sweep generator alongside the existing projects.
 
