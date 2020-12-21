@@ -1,5 +1,9 @@
 # Experiments in Ultrasonics
 
+*A Few Days Later*
+
+Done a bit more experimentation, see [DevLog](https://github.com/danja/ultrasonics/blob/master/devlog.md)
+
 *Day One*
 
 A medic friend has been talking about ultrasonics, got me interested, I want to play.
@@ -10,7 +14,7 @@ They arrived this afternoon.
 
 I have some ideas for more interesting projects, but out of the box it seemed reasonable to try them for the purpose intended. I had an usused Arduino Nano, breadboard etc, whicch for convenience I've attached to a scrap of wood. I set up a new project in PlatformIO (I prefer it to the Arduino IDE, easier to maintain larger projects). Found example distance-measuring code online, it worked first time, wow!
 
-But I got bored quickly. 
+But I got bored quickly.
 
 Added a minimal one-transistor driver and speaker to another output port, stuck in a `tone(port, freq)` (and a `noTone(port)` if the distance > 1m).
 
@@ -31,8 +35,3 @@ Circuit is trivial :
 I suppose I should have a go at making a more usable theremin. One transducer pair for frequency, another for amplitude (will they interact? - *hope so!*). Given the available libraries, MIDI out from an Arduino is pretty trivial.
 
 But what I really want to play with is around spacial scanning, around the phased-array thing, but more minimal.
-
-
-
-
-
